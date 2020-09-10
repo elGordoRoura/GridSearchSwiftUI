@@ -26,6 +26,7 @@ struct Result: Decodable, Hashable {
 class GridViewModel: ObservableObject {
     @Published var results = [Result]()
     
+    
     init() {
             guard let url = URL(string: "https://rss.itunes.apple.com/api/v1/us/ios-apps/new-apps-we-love/all/100/explicit.json") else { return }
             URLSession.shared.dataTask(with: url) { (data, resp, err) in
@@ -43,6 +44,8 @@ class GridViewModel: ObservableObject {
 }
 
 
+// MARK: - ContentView
+
 struct ContentView: View {
     
     @ObservedObject var vm = GridViewModel()
@@ -59,9 +62,11 @@ struct ContentView: View {
                     ForEach(vm.results, id: \.self) { app in
                         AppInfo(app: app)
                     }
-                }).padding(.horizontal, 12)
-            }.navigationTitle("Grid Search LBTA")
-        }
+                }) //: LAZYVGRID
+                .padding(.horizontal, 12)
+            } //: SCROLLVIEW
+            .navigationTitle("Grid Search LBTA")
+        } //: NAVIGATIONVIEW
     }
 }
 
