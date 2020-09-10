@@ -35,7 +35,9 @@ class GridViewModel: ObservableObject {
                 do {
                     let rss = try JSONDecoder().decode(RSS.self, from: data)
                     print(rss)
-                    self.results = rss.feed.results
+                    DispatchQueue.main.async {
+                        self.results = rss.feed.results
+                    }
                 } catch {
                     print("Failed to decode: \(error)")
                 }
