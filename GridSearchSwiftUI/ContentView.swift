@@ -24,8 +24,12 @@ struct Result: Decodable, Hashable {
 
 
 class GridViewModel: ObservableObject {
+    // MARK: - PROPERTIES
+    
     @Published var results = [Result]()
     
+    
+    // MARK: - CUSTOM INIT
     
     init() {
             guard let url = URL(string: "https://rss.itunes.apple.com/api/v1/us/ios-apps/new-apps-we-love/all/100/explicit.json") else { return }
@@ -49,9 +53,12 @@ class GridViewModel: ObservableObject {
 // MARK: - ContentView
 
 struct ContentView: View {
+    // MARK: - PROPERTIES
     
     @ObservedObject var vm = GridViewModel()
     
+    
+    // MARK: - BODY
     
     var body: some View {
         NavigationView {
